@@ -15,8 +15,8 @@ node ('ubuntu'){
      stage('SAST') {
        // node('ubuntu'){
          
-          sh 'rm -f package-lock.json'
-         build 'SNYK-SAST' 
+       ///   sh 'rm -f package-lock.json'
+      ///   build 'SNYK-SAST' 
         /*  withCredentials([string(credentialsId: 'sk', variable: 'TOKEN')]) {
           build 'SNYK-SAST'  
             
@@ -39,7 +39,7 @@ node ('ubuntu'){
    stage('IMAGE-VULNERABILITY-TEST') {
       //  node('master'){
         
-            build 'AQUASEC-SECURITY' 
+       ///     build 'AQUASEC-SECURITY' 
       //  }
 
            sh 'echo "Image Vulnerability Test passed"'
@@ -51,8 +51,8 @@ node ('ubuntu'){
          * First, the incremental build number from Jenkins
          * Second, the 'latest' tag.
          * Pushing multiple tags is cheap, as all the layers are reused. */
-      docker.withRegistry('https://registry.hub.docker.com', 'dockerhub') {
-            app.push("latest")
+     /// docker.withRegistry('https://registry.hub.docker.com', 'dockerhub') {
+     ///       app.push("latest")
         			}
          }
      
@@ -60,14 +60,14 @@ node ('ubuntu'){
 
     stage('Pull-image-server') {
 
-         		sh "docker-compose down"
-        		sh "docker-compose up -d"			
+        /// 		sh "docker-compose down"
+        ///		sh "docker-compose up -d"			
       }
    
      stage('DAST') {
         /* Ideally, we would run a test framework against our image.
          * For this example, we're using a Volkswagen-type approach ;-) */
-            build 'OWASP-ZAP' 
+         ///   build 'OWASP-ZAP' 
 
             sh 'echo "DAST Test passed"'
         
