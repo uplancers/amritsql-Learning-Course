@@ -67,9 +67,11 @@ node ('ubuntu'){
      stage('DAST') {
         /* Ideally, we would run a test framework against our image.
          * For this example, we're using a Volkswagen-type approach ;-) */
+        node('ubuntu'){
             build 'OWASP-ZAP' 
 
             sh 'echo "DAST Test passed"'
+        }
         
     }
    post {
