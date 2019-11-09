@@ -53,7 +53,7 @@ node ('ubuntu'){
          * Pushing multiple tags is cheap, as all the layers are reused. */
      /// docker.withRegistry('https://registry.hub.docker.com', 'dockerhub') {
      ///       app.push("latest")
-        			}
+     ///   			}
          }
      
      
@@ -81,6 +81,7 @@ node ('ubuntu'){
                     mimeType: 'text/html',
                     subject: "Job '${env.JOB_NAME}' '${env.BUILD_NUMBER}'", 
                     to: 'trainingfordevsecops@gmail.com'
-        }
+               }
     
+      }
 }
