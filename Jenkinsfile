@@ -160,7 +160,9 @@
 
    // Send notifications
 
-   slackSend (color: colorCode, message: summary)
+   //slackSend (color: colorCode, message: summary)
+    slackSend (color: '#FFFF00', message: summary)
+	 
 
  
 
@@ -173,7 +175,7 @@
        subject: subject,
 
        body: details,
-	   mimeType: 'text/html',
+       mimeType: 'text/html',
 
       // recipientProviders: [[$class: 'DevelopersRecipientProvider']]
 	   to: 'trainingfordevsecops@gmail.com'
