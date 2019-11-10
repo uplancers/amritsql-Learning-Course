@@ -161,7 +161,8 @@
    // Send notifications
 
    //slackSend (color: colorCode, message: summary)
-    slackSend (color: '#FFFF00', message: summary)
+   // slackSend (color: '#FFFF00', message: summary)
+    slackSend (color: 'good', message: summary)
 	 
 
  
