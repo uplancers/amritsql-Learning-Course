@@ -140,19 +140,19 @@
 
      color = 'YELLOW'
 
-   //  colorCode = '#FFFF00'
+     colorCode = '#FFFF00'
 
    } else if (buildStatus == 'SUCCESSFUL') {
 
      color = 'GREEN'
 
-    // colorCode = '#00FF00'
+     colorCode = '#00FF00'
 
    } else {
 
      color = 'RED'
 
-    // colorCode = '#FF0000'
+     colorCode = '#FF0000'
 
    }
 
@@ -162,7 +162,7 @@
 
    //slackSend (color: colorCode, message: summary)
    // slackSend (color: '#FFFF00', message: summary)
-    slackSend (color: 'good', message: summary)
+    slackSend (color: colorCode, message: summary)
 	 
 
  
