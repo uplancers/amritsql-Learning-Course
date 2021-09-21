@@ -1,78 +1,40 @@
-
-node ('ubuntu'){
-   
-      environment {
-           SNYK_TOKEN = credentials('SYNK')
-    } 
-    def app
-
+node ('Ubuntu-app-agent'){  
+    //def app
     stage('Cloning Git') {
         /* Let's make sure we have the repository cloned to our workspace */
-
        checkout scm
-    }
-     
-     stage('SAST') {
-       // node('ubuntu'){
-         
-       ///   sh 'rm -f package-lock.json'
-      ///   build 'SNYK-SAST' 
-        /*  withCredentials([string(credentialsId: 'sk', variable: 'TOKEN')]) {
-          build 'SNYK-SAST'  
-            
-               println(env.TOKEN)
-            snykSecurity(snykInstallation: 'synk-scan', tokenCredentialId : env.TOKEN, additionalArguments: 'test', monitor: true, severity: 'high') 
-          
-          }*/
-               sh 'echo "SAST Test passed "' }
-        
-    
+    }  
+   /* stage('SAST'){
+        build 'SECURITY-SAST-SNYK'
+    }*/
 
+    
     stage('Build-and-Tag') {
-        /* This builds the actual image; synonymous to
+      sh 'echo Build-and-Tag'
+    /* This builds the actual image; synonymous to
          * docker build on the command line */
-
-        app = docker.build("amrit96/snake")
+        app = docker.build("nabeel7129/snake")
     }
-
-    
-   stage('IMAGE-VULNERABILITY-TEST') {
-      //  node('master'){
-        
-       ///     build 'AQUASEC-SECURITY' 
-      //  }
-
-           sh 'echo "Image Vulnerability Test passed"'
-        
-    }
-
     stage('Post-to-dockerhub') {
-        /* Finally, we'll push the image with two tags:
-         * First, the incremental build number from Jenkins
-         * Second, the 'latest' tag.
-         * Pushing multiple tags is cheap, as all the layers are reused. */
-     /// docker.withRegistry('https://registry.hub.docker.com', 'dockerhub') {
-     ///       app.push("latest")
-     ///   			}
+      sh 'echo Post-to-dockerhub'
+    
+    docker.withRegistry('https://registry.hub.docker.com', 'docker_hub') {
+            app.push("latest")
+        			}
          }
-     
-     
-
+  /*  stage('SECURITY-IMAGE-SCANNER'){
+        build 'SECURITY-IMAGE-SCANNER-AQUAMICROSCANNER'
+    }*/
+  
+    
     stage('Pull-image-server') {
-
-        /// 		sh "docker-compose down"
-        ///		sh "docker-compose up -d"			
+    sh 'echo Pull-image-server'
+        sh "docker-compose down"
+         sh "docker-compose up -d"
       }
-   
-     stage('DAST') {
-        /* Ideally, we would run a test framework against our image.
-         * For this example, we're using a Volkswagen-type approach ;-) */
-        node('ubuntu'){
-           // build 'OWASP-ZAP' 
-
-            sh 'echo "DAST Test passed"'
-        }
-        
-    }
-   
 }
+    
+   /* stage('DAST')
+        {
+        build 'SECURITY-DAST-OWASP_ZAP'
+        }*/
